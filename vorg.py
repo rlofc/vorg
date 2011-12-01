@@ -8,13 +8,6 @@ from subprocess import Popen, PIPE
 import fileinput
 from datetime import datetime
 
-#p = Popen(['find', '/home/akira', '-name','"*.vorg"'], stdout=PIPE, stderr=PIPE, stdin=PIPE)
-#matches = []
-#for root, dirnames, filenames in os.walk('/home/akira'):
-#  for filename in fnmatch.filter(filenames, '*.vorg'):
-#    matches.append(os.path.join(root, filename))
-#print matches
-#print os.system('find /home/akira -name "*.vorg"')
 parser = OptionParser()
 parser.add_option("-c", "--command", dest="command",help="COMMAND to execute", metavar="COMMAND")
 parser.add_option("-f", "--file", dest="filename",help="add new items to FILE", metavar="FILE")
@@ -123,7 +116,7 @@ def command_add(options):
           line = pad+"- [ ] " + task + " "+mtags+ "\n"+ line
         if log:
           now = datetime.now()
-          line = "%s- %s | %s\n" % (pad,now.strftime("%Y-%m-%d @ %H:%M"),log) + line
+          line = "%s- %s ~ %s\n" % (pad,now.strftime("%Y-%m-%d @ %H:%M"),log) + line
         if bookmark:
           line = pad+"- " + bookmark + "\n"+ line
       print line,
