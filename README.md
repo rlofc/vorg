@@ -77,11 +77,11 @@ The ViM plugin have the following keyboard shortcuts predefined:
 ### insert mode
 - **--** indent and begin a new section
 - **-=** indent and begin a new task
-- **`** add a new tag
+- **`** add a new tag (without moving or typing the markup)
 
 ### normal mode
-- **<TAB>** fold or unfold a section
-- **==** check a task checkbox
-- **--** uncheck a task checkbox
-- **<C>+k** move a line up
-- **<C>+j** move a line down
+- **TAB** : fold or unfold a section
+- **==**  : check a task checkbox
+- **--**  : uncheck a task checkbox
+- **CTRL+k** : move a line up
+- **CTRL+j** : move a line down
