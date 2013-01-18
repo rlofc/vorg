@@ -45,7 +45,8 @@ done and are prioritized based on their order.
 ```
 
 ### Indentation
-Vorg uses 2 spaces to indent items. This scheme ensures your files will be readable in any editor.
+A valid vorg file uses (exactly) 2 spaces to indent items. This scheme ensures your files will be readable in any editor.
+This is not a technical constraint. It is an aesthetic constraint designed to make sure vorg files are easy to read.
 
 ### Free Text
 Sections and tasks can contain any number of lines of free text aligned
@@ -74,10 +75,13 @@ Shortcuts
 The ViM plugin have the following keyboard shortcuts predefined:
 
 ### insert mode
-**--** indent and begin a new section
-**-=** indent and begin a new task
+- **--** indent and begin a new section
+- **-=** indent and begin a new task
+- **`** add a new tag
 
 ### normal mode
-**==** check a task checkbox
-**--** uncheck a task checkbox
-
+- **<TAB>** fold or unfold a section
+- **==** check a task checkbox
+- **--** uncheck a task checkbox
+- **<C>+k** move a line up
+- **<C>+j** move a line down
