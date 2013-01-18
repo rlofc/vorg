@@ -1,28 +1,29 @@
 " vorg.vim - Vim ORG mode. Your stuff in plain text.
 " Maintainer:   Ithai Levi <http://github.org/L3V3L9/>
-" Version:      0.2
+" Version:      0.3
 " GetLatestVimScripts: 2842 1 :AutoInstall: vorg.vim
 
-"Settings
+" Indentation settings based on the vorg specification
 setlocal smartindent
+setlocal softtabstop=2
 setlocal tabstop=2
 setlocal shiftwidth=2
 setlocal noexpandtab
 
+" use TAB in normal mode to fold and unfold patern items
 nmap <buffer> <TAB> za
 nmap <buffer> <S-TAB> zA
-nmap <buffer> ,c ma0t]rx`a
-nmap <buffer> ,u ma0t]r `a
-nmap <buffer> <F7> mz:m+<CR>==`z
-nmap <buffer> <F6> mz:m-2<CR>==`z
 
+" insert mode shortcuts to add items and tasks
 ab <buffer> -- <TAB>-
 ab <buffer> -= - [ ]
 
-" Quickly insert dates in insert mode
-ab <buffer> dd <C-R>=strftime("%Y-%m-%d")<CR>
-ab <buffer> dt <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR>
-ab <buffer> -0 - <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR> \|
+" normal mode shortcuts to check and uncheck tasks
+nmap <buffer> == ma0t]rx`a
+nmap <buffer> -- ma0t]r `a
+
+" shortcut for adding tags at the end of an item
+imap ` <right><right><space><><left>
 
 " Shift lines up and down
 nnoremap <buffer> <C-j> mz:m+<CR>`z
@@ -32,24 +33,30 @@ inoremap <buffer> <C-k> <Esc>:m-2<CR>gi
 vnoremap <buffer> <C-j> :m'>+<CR>gv=`<my`>mzgv`yo`z
 vnoremap <buffer> <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
 
+" shortcut to find tags
+nnoremap <buffer> <C-t> :/-.*\<.*.*\><LEFT><LEFT><LEFT>
 nnoremap <buffer> <C-o> :/[-\*]\ *\[\ \].*@
-nnoremap <buffer> <C-t> :/-.*(.*.*)<LEFT><LEFT><LEFT>
 
-ab <buffer> dn1 <C-R>=DateLastDay(1)<CR>
-ab <buffer> dn2 <C-R>=DateLastDay(2)<CR>
-ab <buffer> dn3 <C-R>=DateLastDay(3)<CR>
-ab <buffer> dn4 <C-R>=DateLastDay(4)<CR>
-ab <buffer> dn5 <C-R>=DateLastDay(5)<CR>
-ab <buffer> dn6 <C-R>=DateLastDay(6)<CR>
-ab <buffer> dn7 <C-R>=DateLastDay(7)<CR>
-"nnoremap <silent> <Leader>n1 =DateLastDay(1)
+" shortcuts for date entry 
+ab <buffer> dd <C-R>=strftime("%Y-%m-%d")<CR>
+ab <buffer> dt <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR>
+ab <buffer> -0 - <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR> \|
 
+function! s:DateFollowing(nDays)
+    let day  = abs(a:day) % 7
+    let dir  = a:day < 0 ? -1 : 1
+    let sday = 60 * 60 * 24 * dir
+    let time = localtime() + sday
+    while strftime('%w', time) != nDays
+        let time += sday
+    endwhile
+    return strftime('%Y-%m-%d', time)
+endfunction
 
-map <buffer> ,w :VorgFollowLink()<CR>
-
-if exists("*SpeedDatingFormat")
-	" Speeddating integration - config date format
-	SpeedDatingFormat %Y-%m-%d
-endif
-
-
+ab <buffer> dn1 <C-R>=DateFollowing(1)<CR>
+ab <buffer> dn2 <C-R>=DateFollowing(2)<CR>
+ab <buffer> dn3 <C-R>=DateFollowing(3)<CR>
+ab <buffer> dn4 <C-R>=DateFollowing(4)<CR>
+ab <buffer> dn5 <C-R>=DateFollowing(5)<CR>
+ab <buffer> dn6 <C-R>=DateFollowing(6)<CR>
+ab <buffer> dn7 <C-R>=DateFollowing(7)<CR>
