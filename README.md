@@ -2,10 +2,10 @@ vorg
 ====
 The plain text organizer for ViM
 
-Usage
------
-
-Vorg uses 2 spaces to indent items. This scheme ensures your files will be readable in any editor:
+Format
+------
+The vorg format is designed to be easy on the eyes and readable
+in any text editor. 
 
 ```
 - Today 
@@ -29,4 +29,55 @@ Vorg uses 2 spaces to indent items. This scheme ensures your files will be reada
 - Logbook
   - 2012-10-23 @ 12:00 | Found a nice CSS tool <tools>
 ```
+
+### Sections and Tasks
+Vorg is a hierarchical file format. You organize
+your notes, tasks and text in sections, sub-sections,
+sub-sub-sections etc.
+Tasks are a special kind of sections. Tasks can be marked
+done and are prioritized based on their order.
+
+```
+- Section
+  - Sub-Section
+     - [ ] First Priority Task
+     - [x] Second Priority Task
+```
+
+### Indentation
+Vorg uses 2 spaces to indent items. This scheme ensures your files will be readable in any editor.
+
+### Free Text
+Sections and tasks can contain any number of lines of free text aligned
+with the section title.
+
+```
+- Section
+  - Sub-Section
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+    sed do eiusmod tempor incididunt ut labore et dolore 
+    magna aliqua. 
+```
+
+### Tags
+Sections and tasks can be tagged. Tags can be used to indicate context
+or category and are important when you need to gather items from
+a large set of long vorg files.
+
+```
+- Section <tag1> <tag2>
+  - [ ] My Task <tag3>
+```
+
+Shortcuts
+---------
+The ViM plugin have the following keyboard shortcuts predefined:
+
+### insert mode
+**--** indent and begin a new section
+**-=** indent and begin a new task
+
+### normal mode
+**==** check a task checkbox
+**--** uncheck a task checkbox
 
