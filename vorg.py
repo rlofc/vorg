@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/python
 import sys
 from optparse import OptionParser
 from os.path import exists
@@ -12,8 +12,8 @@ parser = OptionParser()
 parser.add_option("-c", "--command", dest="command",help="COMMAND to execute", metavar="COMMAND")
 parser.add_option("-f", "--file", dest="filename",help="add new items to FILE", metavar="FILE")
 parser.add_option("-t", "--task", dest="task",help="task item description", metavar="TASK")
-parser.add_option("-l", "--log", dest="log",help="task item description", metavar="TASK")
-parser.add_option("-b", "--bookmark", dest="bookmark",help="task item description", metavar="TASK")
+parser.add_option("-l", "--log", dest="log",help="log entry", metavar="TASK")
+parser.add_option("-b", "--bookmark", dest="bookmark",help="bookmark entry", metavar="TASK")
 parser.add_option("-w", "--where", dest="where",help="where in the hierarchy items will be added", metavar="CONTEXT")
 parser.add_option("-g", "--tags", dest="tags",help="tags to associate with added item", metavar="TAGS")
 parser.add_option("-q", "--quiet",action="store_false", dest="verbose", default=True,help="don't print status messages to stdout")
@@ -29,17 +29,11 @@ def cprint(msg):
   if options["verbose"]:
     print msg
 
-if False:
-  p = Popen(['find', '/home/akira','-name','*.vorg'], stdout=PIPE, stderr=PIPE, stdin=PIPE)
-  cprint("scanning for VORG files..")
-  output = p.stdout.read()
-  cprint(str(len(output.split("\n"))) + " files found")
-
 def linelevel(line):
   dashi = line.find("-")
   if dashi<5 and dashi!=-1:
     sub = line[0:dashi+1]
-    items = ["-","\t-","\t\t-","\t\t\t-","\t\t\t\t-"]
+    items = ["-","  -","    -","      -","        -"]
     if sub in items: 
       return items.index(sub)
   return -1
@@ -111,7 +105,7 @@ def command_add(options):
       if linenum==0:
         pad = ""
         for x in range(indent):
-          pad = pad +"\t"
+          pad = pad +"  "
         if task:
           line = pad+"- [ ] " + task + " "+mtags+ "\n"+ line
         if log:
