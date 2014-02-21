@@ -1,0 +1,69 @@
+body {
+    background:#ddd;
+    margin:0;
+}
+
+header {
+    width:100%;
+    height:160px;
+    background: url(../img/custom-bg.png);
+    border-bottom: 1px solid #555;
+    box-shadow: inset 0px -0px 90px #000;
+}
+
+.title { 
+    font-family: 'Allerta Stencil', sans-serif;
+    font-size: 8em;
+    font-width: normal;
+    line-height:160px;
+    color: #222222;
+    text-shadow: 0px 1px #aaa ,0px -1px #101010;
+    width:200px;
+    margin:auto;
+    font-weight:normal;
+}
+
+.content {
+    padding-top:50px;
+    border-top:20px solid #333;
+}
+
+.promo {
+    text-shadow: 0px 1px #fff;
+}
+
+.promo .label { font-size:100%}
+
+.promo p {
+    line-height:1.7em;
+    font-size:110%;
+    font-weight:bold;
+}
+
+.promo h1 {
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.c0 { color: #773311; }
+.c1 { color: #337711; }
+.c2 { color: #113377; }
+.c3 { color: #773355; }
+.c4 { color: #115588; }
+.c5 { color: #336667; }
+
+@media (max-width: 480px) { 
+    video { width:320px; height:228px; }
+} 
+@media (max-width: 768px) {
+    video { width:320px; height:228px; }
+} 
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    video { width:480px; height:342px; }
+} 
+
+@media (min-width: 1200px) {
+    video { width:718px; height:512px; }
+} 
+
+
