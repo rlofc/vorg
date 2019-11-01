@@ -1,14 +1,14 @@
-vorg 
+vorg
 ====
 The plain text organizer for ViM
 
 Format
 ------
 The vorg format is designed to be easy on the eyes and readable
-in any text editor. 
+in any text editor.
 
 ```
-- Today 
+- Today
   - [ ] Call Tom <office> <2m>
   - [ ] Pick-up my laundry <car> <30m>
 - Someday
@@ -55,9 +55,9 @@ with the section title.
 ```
 - Section
   - Sub-Section
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-    sed do eiusmod tempor incididunt ut labore et dolore 
-    magna aliqua. 
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua.
 ```
 
 ### Tags
@@ -81,7 +81,6 @@ The ViM plugin have the following keyboard shortcuts predefined:
 
 ### normal mode
 - **TAB** : fold or unfold a section
-- **==**  : check a task checkbox
-- **--**  : uncheck a task checkbox
+- **==**  : toggle a task checkbox
 - **CTRL+k** : move a line up
 - **CTRL+j** : move a line down
