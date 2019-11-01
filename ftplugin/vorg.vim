@@ -41,21 +41,20 @@ ab <buffer> dd <C-R>=strftime("%Y-%m-%d")<CR>
 ab <buffer> dt <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR>
 ab <buffer> -0 - <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR> \|
 
-function! s:DateFollowing(nDays)
-    let day  = abs(a:day) % 7
-    let dir  = a:day < 0 ? -1 : 1
-    let sday = 60 * 60 * 24 * dir
-    let time = localtime() + sday
-    while strftime('%w', time) != nDays
-        let time += sday
-    endwhile
-    return strftime('%Y-%m-%d', time)
-endfunction
+" add next weekday date shortcuts
+ab <buffer> dn1 <C-R>=vorg#DateFollowing(1)<CR>
+ab <buffer> dn2 <C-R>=vorg#DateFollowing(2)<CR>
+ab <buffer> dn3 <C-R>=vorg#DateFollowing(3)<CR>
+ab <buffer> dn4 <C-R>=vorg#DateFollowing(4)<CR>
+ab <buffer> dn5 <C-R>=vorg#DateFollowing(5)<CR>
+ab <buffer> dn6 <C-R>=vorg#DateFollowing(6)<CR>
+ab <buffer> dn7 <C-R>=vorg#DateFollowing(7)<CR>
 
-ab <buffer> dn1 <C-R>=DateFollowing(1)<CR>
-ab <buffer> dn2 <C-R>=DateFollowing(2)<CR>
-ab <buffer> dn3 <C-R>=DateFollowing(3)<CR>
-ab <buffer> dn4 <C-R>=DateFollowing(4)<CR>
-ab <buffer> dn5 <C-R>=DateFollowing(5)<CR>
-ab <buffer> dn6 <C-R>=DateFollowing(6)<CR>
-ab <buffer> dn7 <C-R>=DateFollowing(7)<CR>
+" add previous weekday date shortcuts
+ab <buffer> dp1 <C-R>=vorg#DateFollowing(-1)<CR>
+ab <buffer> dp2 <C-R>=vorg#DateFollowing(-2)<CR>
+ab <buffer> dp3 <C-R>=vorg#DateFollowing(-3)<CR>
+ab <buffer> dp4 <C-R>=vorg#DateFollowing(-4)<CR>
+ab <buffer> dp5 <C-R>=vorg#DateFollowing(-5)<CR>
+ab <buffer> dp6 <C-R>=vorg#DateFollowing(-6)<CR>
+ab <buffer> dp7 <C-R>=vorg#DateFollowing(-7)<CR>

@@ -78,6 +78,11 @@ The ViM plugin have the following keyboard shortcuts predefined:
 - **--** indent and begin a new section
 - **-=** indent and begin a new task
 - **`** add a new tag (without moving or typing the markup)
+- **dd** add the current date
+- **dt** add the current datetime
+- **-0** add the current datetime as a section
+- **dn1 to dn7** add the date of the next closest weekday (monday to sunday)
+- **dp1 to dp7** add the date of the previous closest weekday (monday to sunday)
 
 ### normal mode
 - **TAB** : fold or unfold a section
