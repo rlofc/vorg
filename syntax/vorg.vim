@@ -44,7 +44,7 @@ hi! link Folded Comment
 function! SimpleFoldText()
 	return	repeat(' ',indent(v:foldstart)).substitute(getline(v:foldstart),"[ \t]*[-\*]","+","").' '
 endfunction
-set foldtext=SimpleFoldText() " Custom fold text function
+setlocal foldtext=SimpleFoldText() " Custom fold text function
 
 function! LimitFoldLevel(level)
 	return a:level
@@ -84,7 +84,7 @@ function! VorgFoldExpr(lnum)
    return '='
 endfunction
 
-set foldmethod=expr
-set foldexpr=VorgFoldExpr(v:lnum)
+setlocal foldmethod=expr
+setlocal foldexpr=VorgFoldExpr(v:lnum)
 
 let b:current_syntax = "vorg"
