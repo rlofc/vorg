@@ -23,7 +23,7 @@ nmap <buffer> == ma0t]rx`a
 nmap <buffer> -- ma0t]r `a
 
 " shortcut for adding tags at the end of an item
-imap ` <right><right><space><><left>
+imap <buffer> ` <right><right><space><><left>
 
 " Shift lines up and down
 nnoremap <buffer> <C-j> mz:m+<CR>`z
@@ -37,7 +37,7 @@ vnoremap <buffer> <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
 nnoremap <buffer> <C-t> :/-.*\<.*.*\><LEFT><LEFT><LEFT>
 nnoremap <buffer> <C-o> :/[-\*]\ *\[\ \].*@
 
-" shortcuts for date entry 
+" shortcuts for date entry
 ab <buffer> dd <C-R>=strftime("%Y-%m-%d")<CR>
 ab <buffer> dt <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR>
 ab <buffer> -0 - <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR> \|
