@@ -41,10 +41,26 @@ hi! vorgLink gui=underline
 hi! link Folded Comment
 
 " Fold based on the Vorg specification
-function! SimpleFoldText()
-	return	repeat(' ',indent(v:foldstart)).substitute(getline(v:foldstart),"[ \t]*[-\*]","+","").' '
+function! VorgFoldText()
+    let foldlines = getline(v:foldstart, v:foldend)
+    let text = repeat(' ', indent(v:foldstart)) . substitute(foldlines[0] ,"[ \t]*[-\*]" ,"+" ,"")
+    let total_boxes = 0
+    let total_checked = 0
+    for line in foldlines
+        if match(line, "\\[ \\]") > -1
+            let total_boxes += 1
+        elseif match(line, "\\[x\\]") > -1
+            let total_boxes += 1
+            let total_checked += 1
+        endif
+    endfor
+    if total_boxes > 0
+        let text .= " [ " . total_checked . " / " . total_boxes . " ]"
+    endif
+    return text . ' '
 endfunction
-setlocal foldtext=SimpleFoldText() " Custom fold text function
+
+setlocal foldtext=VorgFoldText() " Custom fold text function
 
 function! LimitFoldLevel(level)
 	return a:level
