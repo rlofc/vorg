@@ -19,7 +19,8 @@ ab <buffer> -- <TAB>-
 ab <buffer> -= - [ ]
 
 " normal mode shortcuts to check and uncheck tasks
-nmap <buffer> <silent> == :silent! call vorg#ToggleCheckbox()<CR>
+nmap <buffer> <silent> = :call vorg#ToggleCheckbox()<CR>
+vmap <buffer> <silent> = :call vorg#ToggleCheckbox()<CR>
 
 " shortcut for adding tags at the end of an item
 imap <buffer> ` <right><right><space><><left>

@@ -1,10 +1,17 @@
-function! vorg#ToggleCheckbox()
-    let line = getline(".")
-    if match(line, "\[x\]") > -1
-        s/\[x\]/[ ]
-    else
-        s/\[ \]/[x]
-    endif
+function! vorg#ToggleCheckbox() range
+    let view = winsaveview()
+    let lines = getline(a:firstline, a:lastline)
+    let linenum = a:firstline
+    for line in lines
+        if match(line, "\\[x\\]") > -1
+            call setline(linenum, substitute(line, "\\[x\\]", "[ ]", ""))
+        elseif match(line, "\\[ \\]") > -1
+            call setline(linenum, substitute(line, "\\[ \\]", "[x]", ""))
+        endif
+
+        let linenum += 1
+    endfor
+    call winrestview(view)
 endfunction
 
 function! vorg#DateFollowing(nDays)
