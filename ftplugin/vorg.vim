@@ -10,9 +10,9 @@ setlocal tabstop=2
 setlocal shiftwidth=2
 setlocal noexpandtab
 
-" use TAB in normal mode to fold and unfold patern items
-nmap <buffer> <TAB> za
-nmap <buffer> <S-TAB> zA
+" use - and ? in normal mode to fold and unfold patern items
+nmap <buffer> - za
+nmap <buffer> ? zA
 
 " insert mode shortcuts to add items and tasks
 ab <buffer> -- <TAB>-
@@ -20,8 +20,8 @@ ab <buffer> -= - [ ]
 ab <buffer> == [ ]
 
 " normal mode shortcuts to check and uncheck tasks
-nmap <buffer> <silent> = :call vorg#ToggleCheckbox()<CR>
-vmap <buffer> <silent> = :call vorg#ToggleCheckbox()<CR>
+nmap <buffer> <silent> xx :call vorg#ToggleCheckbox()<CR>
+vmap <buffer> <silent> xx :call vorg#ToggleCheckbox()<CR>
 
 " shortcut for adding tags at the end of an item
 imap <buffer> ` <right><right><space><><left>

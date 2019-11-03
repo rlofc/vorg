@@ -86,13 +86,14 @@ The ViM plugin have the following keyboard shortcuts predefined:
 - **dp1 to dp7** add the date of the previous closest weekday (monday to sunday)
 
 ### normal mode
-- **TAB** : fold or unfold a section
-- **=**  : toggle a task checkbox (works with count)
+- **-** : fold or unfold a section
+- **?** : fold or unfold a section recursively
+- **xx**  : toggle a task checkbox (works with count)
 - **CTRL+k** : move a line up
 - **CTRL+j** : move a line down
 
 ### visual mode
-- **=**  : toggle all checkboxes in lines
+- **xx**  : toggle all checkboxes in lines
 
 Constructs
 ----------
