@@ -13,32 +13,36 @@ endif
 syn match vorgDeadline        "[<>^]\ \d*[/-]\d*[/-]\d*" contained
 syn match vorgTag             "<.*>" contained
 syn match vorgLink            "\%(http://\|www\.\)[^ ,;\t]*" contained
-syn match vorgTitle           "^\t*[-\*].*" contains=vorgTag,vorgLink
-syn match vorgTaskAlt         "\t*\[[o\ ]\].*" contains=vorgTag,vorgDeadline,vorgLink
-syn match vorgTask            "\t*[-\*].*\[[o\ ]\].*" contains=vorgTag,vorgDeadline,vorgLink
-syn match vorgDone            "\t*[-\*].*\[[X|x]\].*"
-syn match vorgDoneAlt         "\t*\[[X|x]\].*"
+
+syn match vorgLogDate         "[~|]\ \d*[/-]\d*[/-]\d*[ ]@[ ]\d*:\d*" contained
+syn match vorgPrefixLogDate   "\ *\d*[/-]\d*[/-]\d*[ ]@[ ]\d*:\d*\ [~|]" contained
+
+syn match vorgDoneText        ".*" contained
+syn match vorgTaskText        ".*" contained contains=vorgTag,vorgDeadline,vorgLink,vorgLogDate,vorgPrefixLogDate
+syn match vorgTask            "\[[ ]\]" contained nextgroup=vorgTaskText
+syn match vorgTaskDone        "\[[xX]\]" contained nextgroup=vorgDoneText
+
+syn match vorgFreeText        ".*" contains=vorgDeadline,vorgTag,vorgLink,vorgTask,vorgTaskDone,vorgTitle,vorgLogDate,vorgPrefixLogDate
+syn match vorgListItem        "\t*[-*].*" contains=vorgDeadline,vorgTag,vorgLink,vorgTask,vorgTaskDone,vorgTitle,vorgLogDate,vorgPrefixLogDate
 syn match vorgComment         "// .*"
-syn match vorgLogdate         "\t*[-\*].*\~\ \d*[/-]\d*[/-]\d*[ ]@[ ]\d*:\d*.*" contains=vorgTag,vorgLink
-syn match vorgPrefixLogdate   "\t*[-\*]\ *\d*[/-]\d*[/-]\d*[ ]@[ ]\d*:\d*\ \~.*" contains=vorgTag,vorgLink
 
 hi Function gui=bold
 hi Constant gui=bold
 hi Keyword gui=bold
 hi Number gui=underline
 
-hi def link vorgComment       Comment
-hi def link vorgDone	         Comment
-hi def link vorgDoneAlt	      Comment
-hi def link vorgTitle         Function
-hi def link vorgTaskAlt       Keyword
-hi def link vorgTask          Keyword
-hi def link vorgTag           Comment
-hi def link vorgDeadline      String
-hi def link vorgLogdate       Constant
-hi def link vorgPrefixLogdate Constant
-hi! vorgLink gui=underline
-hi! link Folded Comment
+hi def link vorgComment        Comment
+hi def link vorgTag            Comment
+hi def link vorgTaskText       String
+hi def link vorgDoneText       Comment
+hi def link vorgListItem       Function
+hi def link vorgTask           Special
+hi def link vorgTaskDone       Special
+hi def link vorgDeadline       Todo
+hi def link vorgLogDate        Constant
+hi def link vorgPrefixLogDate  Constant
+hi def link vorgLink           Constant
+hi! link Folded                Comment
 
 " Fold based on the Vorg specification
 function! VorgFoldText()
