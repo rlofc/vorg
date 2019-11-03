@@ -75,8 +75,9 @@ Shortcuts
 The ViM plugin have the following keyboard shortcuts predefined:
 
 ### insert mode
-- **--** indent and begin a new section
-- **-=** indent and begin a new task
+- **--** indent and begin a new list item
+- **-=** begin a new task as list item
+- **==** begin a new task as free text
 - **`** add a new tag (without moving or typing the markup)
 - **dd** add the current date
 - **dt** add the current datetime
@@ -86,6 +87,16 @@ The ViM plugin have the following keyboard shortcuts predefined:
 
 ### normal mode
 - **TAB** : fold or unfold a section
-- **==**  : toggle a task checkbox
+- **=**  : toggle a task checkbox (works with count)
 - **CTRL+k** : move a line up
 - **CTRL+j** : move a line down
+
+### visual mode
+- **=**  : toggle all checkboxes in lines
+
+Constructs
+----------
+Using special notation can cause some parts of a vorg file to have special meaning
+- **... > date** a deadline
+- **... | datetime** a timestamp
+- **// ...** a comment

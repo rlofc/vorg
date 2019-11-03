@@ -17,6 +17,7 @@ nmap <buffer> <S-TAB> zA
 " insert mode shortcuts to add items and tasks
 ab <buffer> -- <TAB>-
 ab <buffer> -= - [ ]
+ab <buffer> == [ ]
 
 " normal mode shortcuts to check and uncheck tasks
 nmap <buffer> <silent> = :call vorg#ToggleCheckbox()<CR>
