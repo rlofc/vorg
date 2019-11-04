@@ -26,11 +26,6 @@ syn match vorgFreeText        ".*" contains=vorgDeadline,vorgTag,vorgLink,vorgTa
 syn match vorgListItem        "\t*[-*].*" contains=vorgDeadline,vorgTag,vorgLink,vorgTask,vorgTaskDone,vorgTitle,vorgLogDate,vorgPrefixLogDate
 syn match vorgComment         "// .*"
 
-hi Function gui=bold
-hi Constant gui=bold
-hi Keyword gui=bold
-hi Number gui=underline
-
 hi def link vorgComment        Comment
 hi def link vorgTag            Comment
 hi def link vorgTaskText       String
@@ -42,7 +37,6 @@ hi def link vorgDeadline       Todo
 hi def link vorgLogDate        Constant
 hi def link vorgPrefixLogDate  Constant
 hi def link vorgLink           Constant
-hi! link Folded                Comment
 
 " Fold based on the Vorg specification
 function! VorgFoldText()
