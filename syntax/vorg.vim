@@ -58,35 +58,41 @@ function! VorgFoldText()
     return text . ' '
 endfunction
 
-let b:current_fold_level = 0
 function! VorgFoldExpr(lnum)
-
-    let this_line_indent = indent(a:lnum)
-    let prev_line_indent = indent(prevnonblank(a:lnum - 1))
-    let next_line_indent = indent(nextnonblank(a:lnum + 1))
-    let line_is_empty = match(getline(a:lnum), "^\s*$") > -1
-
     " an empty line - same level
-    if line_is_empty
-        return b:current_fold_level
+    if match(getline(a:lnum), "^\s*$") > -1
+        return '='
     endif
 
+    let current_fold_level = foldlevel(a:lnum - 1)
+    let this_line_indent = indent(a:lnum)
+    let next_line_indent = indent(nextnonblank(a:lnum + 1))
+    let prev_line_indent = indent(prevnonblank(a:lnum - 1))
+    " get the current fold level
+    if current_fold_level == -1
+        if prev_line_indent <= this_line_indent
+            let current_fold_level = this_line_indent
+        else
+            let current_fold_level = prev_line_indent
+        endif
+        let current_fold_level = current_fold_level / &sw
+    endif
+
+    let new_fold_level = this_line_indent / &sw
     if next_line_indent > this_line_indent
         " next line is a fold under the current one
-        let new_fold_level = this_line_indent / &sw + 1
-        if new_fold_level <= b:current_fold_level
+        let new_fold_level += 1
+        if new_fold_level <= current_fold_level
             " end fold if another one starts with the same level
             return ">" . new_fold_level
         endif
-        let b:current_fold_level = new_fold_level
-    else
+        let current_fold_level = new_fold_level
+    elseif new_fold_level <= current_fold_level
         " ignore unexpected double indents
-        let new_fold_level = this_line_indent / &sw
-        if new_fold_level <= b:current_fold_level
-            let b:current_fold_level = new_fold_level
-        endif
+        let current_fold_level = new_fold_level
     endif
-    return b:current_fold_level
+
+    return current_fold_level
 endfunction
 
 setlocal foldmethod=expr
