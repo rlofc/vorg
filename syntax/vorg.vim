@@ -11,7 +11,7 @@ elseif exists("b:current_syntax")
 endif
 
 syn match vorgDeadline        "!\d*[/-]\d*[/-]\d*" contained
-syn match vorgTag             "<.*>" contained
+syn match vorgTag             "#\w\+" contained
 syn match vorgComment         "// .*" contained
 
 syn match vorgLink            "\%(https\?://\|www\.\)[^ ,;\t]*" contained

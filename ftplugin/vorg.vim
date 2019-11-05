@@ -11,20 +11,18 @@ setlocal shiftwidth=2
 setlocal noexpandtab
 
 " use - and ? in normal mode to fold and unfold patern items
-nmap <buffer> - za
-nmap <buffer> ? zA
+nnoremap <buffer> - za
+nnoremap <buffer> ? zA
 
-" insert mode shortcuts to add items and tasks
+" insert mode shortcuts
 ab <buffer> -- <TAB>-
-ab <buffer> -= - [ ]
-ab <buffer> == [ ]
+ab <buffer> --[ <TAB>- [ ]
+ab <buffer> -[ - [ ]
+ab <buffer> [[ [ ]
 
 " normal mode shortcuts to check and uncheck tasks
-nmap <buffer> <silent> xx :call vorg#toggleCheckbox()<CR>
-vmap <buffer> <silent> xx :call vorg#toggleCheckbox()<CR>
-
-" shortcut for adding tags at the end of an item
-imap <buffer> ` <right><right><space><><left>
+nnoremap <buffer> <silent> cx :call vorg#toggleCheckbox()<CR>
+vnoremap <buffer> <silent> cx :call vorg#toggleCheckbox()<CR>
 
 " Shift lines up and down
 nnoremap <buffer> <C-j> mz:m+<CR>`z
@@ -34,14 +32,10 @@ inoremap <buffer> <C-k> <Esc>:m-2<CR>gi
 vnoremap <buffer> <C-j> :m'>+<CR>gv=`<my`>mzgv`yo`z
 vnoremap <buffer> <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
 
-" shortcut to find tags
-nnoremap <buffer> <C-t> :/-.*\<.*.*\><LEFT><LEFT><LEFT>
-nnoremap <buffer> <C-o> :/[-\*]\ *\[\ \].*@
-
 " shortcuts for date entry
 ab <buffer> dd <C-R>=strftime("%Y-%m-%d")<CR>
 ab <buffer> dt <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR>
-ab <buffer> -0 - <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR> \|
+ab <buffer> -d - <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR> \|
 
 " add next weekday date shortcuts
 ab <buffer> dn1 <C-R>=vorg#dateFollowing(1)<CR>
