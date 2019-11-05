@@ -25,27 +25,22 @@ function! vorg#dateFollowing(nDays)
     return strftime('%Y-%m-%d', time)
 endfunction
 
-function! s:tmpWindowMaps()
+function! s:tmpQuickfix()
+    copen
     nnoremap <buffer> o <CR>
     nnoremap <buffer> q :q<CR>
 endfunction
 
-function! s:replaceSpaces(string)
-    return substitute(a:string, " ", "\\\\ ", "g")
-endfunction
-
 function! vorg#gather(pattern)
     if !empty(a:pattern)
-        execute "silent! vimgrep /" . a:pattern . "/j " . s:replaceSpaces(expand('%'))
-        copen
-        call s:tmpWindowMaps()
+        execute "silent! vimgrep /" . a:pattern . "/j " . substitute(expand('%'), " ", "\\\\ ", "g")
+        call s:tmpQuickfix()
     endif
 endfunction
 
 function! vorg#gatherAll(pattern)
     if !empty(a:pattern)
         execute "silent! vimgrep /" . a:pattern . "/j **/*.vorg"
-        copen
-        call s:tmpWindowMaps()
+        call s:tmpQuickfix()
     endif
 endfunction

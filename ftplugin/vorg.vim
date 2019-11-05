@@ -35,7 +35,7 @@ vnoremap <buffer> <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
 " shortcuts for date entry
 ab <buffer> dd <C-R>=strftime("%Y-%m-%d")<CR>
 ab <buffer> dt <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR>
-ab <buffer> -d - <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR> \|
+ab <buffer> -dl - <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR> \|
 
 " add next weekday date shortcuts
 ab <buffer> dn1 <C-R>=vorg#dateFollowing(1)<CR>
