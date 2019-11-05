@@ -20,8 +20,8 @@ ab <buffer> -= - [ ]
 ab <buffer> == [ ]
 
 " normal mode shortcuts to check and uncheck tasks
-nmap <buffer> <silent> xx :call vorg#ToggleCheckbox()<CR>
-vmap <buffer> <silent> xx :call vorg#ToggleCheckbox()<CR>
+nmap <buffer> <silent> xx :call vorg#toggleCheckbox()<CR>
+vmap <buffer> <silent> xx :call vorg#toggleCheckbox()<CR>
 
 " shortcut for adding tags at the end of an item
 imap <buffer> ` <right><right><space><><left>
@@ -44,19 +44,19 @@ ab <buffer> dt <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR>
 ab <buffer> -0 - <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR> \|
 
 " add next weekday date shortcuts
-ab <buffer> dn1 <C-R>=vorg#DateFollowing(1)<CR>
-ab <buffer> dn2 <C-R>=vorg#DateFollowing(2)<CR>
-ab <buffer> dn3 <C-R>=vorg#DateFollowing(3)<CR>
-ab <buffer> dn4 <C-R>=vorg#DateFollowing(4)<CR>
-ab <buffer> dn5 <C-R>=vorg#DateFollowing(5)<CR>
-ab <buffer> dn6 <C-R>=vorg#DateFollowing(6)<CR>
-ab <buffer> dn7 <C-R>=vorg#DateFollowing(7)<CR>
+ab <buffer> dn1 <C-R>=vorg#dateFollowing(1)<CR>
+ab <buffer> dn2 <C-R>=vorg#dateFollowing(2)<CR>
+ab <buffer> dn3 <C-R>=vorg#dateFollowing(3)<CR>
+ab <buffer> dn4 <C-R>=vorg#dateFollowing(4)<CR>
+ab <buffer> dn5 <C-R>=vorg#dateFollowing(5)<CR>
+ab <buffer> dn6 <C-R>=vorg#dateFollowing(6)<CR>
+ab <buffer> dn7 <C-R>=vorg#dateFollowing(7)<CR>
 
 " add previous weekday date shortcuts
-ab <buffer> dp1 <C-R>=vorg#DateFollowing(-1)<CR>
-ab <buffer> dp2 <C-R>=vorg#DateFollowing(-2)<CR>
-ab <buffer> dp3 <C-R>=vorg#DateFollowing(-3)<CR>
-ab <buffer> dp4 <C-R>=vorg#DateFollowing(-4)<CR>
-ab <buffer> dp5 <C-R>=vorg#DateFollowing(-5)<CR>
-ab <buffer> dp6 <C-R>=vorg#DateFollowing(-6)<CR>
-ab <buffer> dp7 <C-R>=vorg#DateFollowing(-7)<CR>
+ab <buffer> dp1 <C-R>=vorg#dateFollowing(-1)<CR>
+ab <buffer> dp2 <C-R>=vorg#dateFollowing(-2)<CR>
+ab <buffer> dp3 <C-R>=vorg#dateFollowing(-3)<CR>
+ab <buffer> dp4 <C-R>=vorg#dateFollowing(-4)<CR>
+ab <buffer> dp5 <C-R>=vorg#dateFollowing(-5)<CR>
+ab <buffer> dp6 <C-R>=vorg#dateFollowing(-6)<CR>
+ab <buffer> dp7 <C-R>=vorg#dateFollowing(-7)<CR>

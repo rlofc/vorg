@@ -4,32 +4,11 @@
 " GetLatestVimScripts: 2842 1 :AutoInstall: vorg.vim
 
 if exists('loaded_vorg')
-	finish
+    finish
 endif
-let loaded_vorg = 1
-
-function! s:Gather(pattern)
-  if !empty(a:pattern)
-    let results = []
-    execute "vimgrep " . a:pattern . " " . expand('%')
-    :copen
-  endif
-endfunction
-
-function! s:GatherAllVorgs(pattern)
-  if !empty(a:pattern)
-    let results = []
-    execute "vimgrep " . a:pattern . " **/*.vorg"
-    :copen
-  endif
-endfunction
 
 " Offical Vorg interface commands
-if !exists(":VorgGather")
-    command -nargs=? VorgGather :call <SID>Gather(input("Search for: "))
-endif
-if !exists(":VorgGatherAll")
-    command -nargs=? VorgGatherAll :call <SID>GatherAllVorgs(input("Search for: "))
-endif
+command -nargs=? VorgGather :call vorg#gather(input("Search for: "))
+command -nargs=? VorgGatherAll :call vorg#gatherAll(input("Search files for: "))
 
-let b:current_syntax = "vorg"
+let loaded_vorg = 1
