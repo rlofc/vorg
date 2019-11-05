@@ -41,7 +41,10 @@ hi def link vorgLink           Constant
 " Fold based on the Vorg specification
 function! VorgFoldText()
     let foldlines = getline(v:foldstart, v:foldend)
-    let text = repeat(' ', indent(v:foldstart)) . substitute(foldlines[0] ,"[ \t]*[-\*]" ,"+" ,"")
+    let header = substitute(foldlines[0], "\s*-", "+", "")
+    let indent = indent(v:foldstart)
+    let text = repeat(' ', indent - indent / &sw) . header
+
     let total_boxes = 0
     let total_checked = 0
     for line in foldlines
