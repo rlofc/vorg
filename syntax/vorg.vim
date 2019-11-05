@@ -22,6 +22,7 @@ syn match vorgLogDate         "[~|]\ \d*[/-]\d*[/-]\d*[ ]@[ ]\d*:\d*" contained
 syn match vorgPrefixLogDate   "\ *\d*[/-]\d*[/-]\d*[ ]@[ ]\d*:\d*\ [~|]" contained
 
 syn match vorgTask            "\[[ ]\]" contained
+syn match vorgRadio           "([ xX])" contained
 syn match vorgTaskDone        "\[[xX]\]" contained
 syn match vorgDoneText        ".*\[[xX]\].*" contained contains=vorgTaskDone
 
@@ -34,6 +35,7 @@ hi def link vorgTag            Comment
 hi def link vorgDoneText       Comment
 hi def link vorgListItem       Function
 hi def link vorgTask           Special
+hi def link vorgRadio          Special
 hi def link vorgTaskDone       Special
 hi def link vorgDeadline       Todo
 hi def link vorgLogDate        String
@@ -45,9 +47,8 @@ hi def link vorgHex            Constant
 " Fold based on the Vorg specification
 function! VorgFoldText()
     let foldlines = getline(v:foldstart, v:foldend)
-    let header = substitute(foldlines[0], "\s*-", "+", "")
-    let indent = indent(v:foldstart)
-    let text = repeat(' ', indent - indent / &sw) . header
+    let header = substitute(foldlines[0], "^\\s*-", "+", "")
+    let text = repeat(' ', indent(v:foldstart)) . header
 
     let total_boxes = 0
     let total_checked = 0

@@ -8,7 +8,7 @@ setlocal smartindent
 setlocal softtabstop=2
 setlocal tabstop=2
 setlocal shiftwidth=2
-setlocal noexpandtab
+setlocal expandtab
 
 " use - and ? in normal mode to fold and unfold patern items
 nnoremap <buffer> - za
@@ -19,6 +19,9 @@ ab <buffer> -- <TAB>-
 ab <buffer> --[ <TAB>- [ ]
 ab <buffer> -[ - [ ]
 ab <buffer> [[ [ ]
+ab <buffer> --( <TAB>- ( )
+ab <buffer> -( - ( )
+ab <buffer> (( ( )
 
 " normal mode shortcuts to check and uncheck tasks
 nnoremap <buffer> <silent> cx :call vorg#toggleCheckbox()<CR>
@@ -35,7 +38,7 @@ vnoremap <buffer> <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
 " shortcuts for date entry
 ab <buffer> dd <C-R>=strftime("%Y-%m-%d")<CR>
 ab <buffer> dt <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR>
-ab <buffer> -dl - <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR> \|
+ab <buffer> dl <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR> \|
 
 " add next weekday date shortcuts
 ab <buffer> dn1 <C-R>=vorg#dateFollowing(1)<CR>

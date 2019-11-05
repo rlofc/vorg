@@ -11,6 +11,10 @@ in any text editor.
 - Today
   - [ ] Call Tom #office #2m
   - [ ] Pick-up my laundry #car #30m
+  - Evening
+    ( ) Watch a movie
+    (x) Hang out with friends
+    ( ) Study
 - Someday
   - [ ] Read "Getting Things Done" #book
   - [ ] Watch "Men Of Valor" #movie
@@ -27,7 +31,7 @@ in any text editor.
     - [ ] Rent a car
     - [ ] Reserve flights
 - Logbook
-  - 2012-10-23 @ 12:00 | Found a nice CSS tool #tools
+  2012-10-23 @ 12:00 | Found a nice CSS tool #tools
 ```
 
 ### Sections
@@ -39,11 +43,25 @@ The plugin will automatically fold sections based on their indentation level.
 ### Tasks
 Vorg supports and automates task tracking. Existing mappings help with checkbox creation. Tasks can be toggled with **cx** mapping, both individually and in groups (visual mode or range)
 
+A folded section text will show the number of tasks completed and total tasks, for example [ 3 / 5 ]
+
 ```
 - Section
   - Sub-Section
      [ ] First Priority Task
      [x] Second Priority Task
+```
+
+### Radios
+Radio boxes are special kinds of tasks that work in groups. Upon checking a radio box all other boxes in a group are going to be unchecked. A group of radio boxes is based on indentation (same level for all boxes in a group) and on proximity (a line without a radio box breaks the group).
+
+Radio boxes are not taken into account when counting the number of tasks for a section.
+
+```
+- Section
+  - Sub-Section
+     ( ) Either one
+     (x) Or the other
 ```
 
 ### Indentation
@@ -79,11 +97,14 @@ The ViM plugin have the following keyboard shortcuts predefined:
 ### insert mode
 - **--** indent and begin a new list item
 - **--[** indent and begin a new task as list item
+- **--(** indent and begin a new radio as list item
 - **-[** begin a new task as list item
+- **-[** begin a new radio as list item
 - **[[** begin a new task as free text
+- **((** begin a new radio as free text
 - **dd** add the current date
 - **dt** add the current datetime
-- **-dl** add the current datetime as a log entry
+- **dl** add the current datetime as a log entry
 - **dn1 to dn7** add the date of the next closest weekday (monday to sunday)
 - **dp1 to dp7** add the date of the previous closest weekday (monday to sunday)
 
