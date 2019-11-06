@@ -24,8 +24,8 @@ ab <buffer> -( - ( )
 ab <buffer> (( ( )
 
 " normal mode shortcuts to check and uncheck tasks
-nnoremap <buffer> <silent> cx :call vorg#toggleCheckbox()<CR>
-vnoremap <buffer> <silent> cx :call vorg#toggleCheckbox()<CR>
+nnoremap <buffer> <silent> cx :call vorg#tasks#toggleCheckbox()<CR>
+vnoremap <buffer> <silent> cx :call vorg#tasks#toggleCheckbox()<CR>
 
 " Shift lines up and down
 nnoremap <buffer> <C-j> mz:m+<CR>`z

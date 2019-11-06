@@ -4,7 +4,7 @@
 " GetLatestVimScripts: 2842 1 :AutoInstall: vorg.vim
 
 if exists('loaded_vorg')
-    finish
+	finish
 endif
 
 " Offical Vorg interface commands

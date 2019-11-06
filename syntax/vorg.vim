@@ -5,9 +5,9 @@
 
 " Syntax Definition
 if version < 600
-    syntax clear
+	syntax clear
 elseif exists("b:current_syntax")
-    finish
+	finish
 endif
 
 syn match vorgDeadline        "!\d*[/-]\d*[/-]\d*" contained
@@ -44,67 +44,8 @@ hi def link vorgLink           Constant
 hi def link vorgIpv4           Constant
 hi def link vorgHex            Constant
 
-" Fold based on the Vorg specification
-function! VorgFoldText()
-    let foldlines = getline(v:foldstart, v:foldend)
-    let header = substitute(foldlines[0], "^\\s*-", "+", "")
-    let text = repeat(' ', indent(v:foldstart)) . header
-
-    let total_boxes = 0
-    let total_checked = 0
-    for line in foldlines
-        if match(line, "\\[ \\]") > -1
-            let total_boxes += 1
-        elseif match(line, "\\[x\\]") > -1
-            let total_boxes += 1
-            let total_checked += 1
-        endif
-    endfor
-    if total_boxes > 0
-        let text .= " [ " . total_checked . " / " . total_boxes . " ]"
-    endif
-    return text . ' '
-endfunction
-
-function! VorgFoldExpr(lnum)
-    " an empty line - same level
-    if match(getline(a:lnum), "^\s*$") > -1
-        return '='
-    endif
-
-    let current_fold_level = foldlevel(a:lnum - 1)
-    let this_line_indent = indent(a:lnum)
-    let next_line_indent = indent(nextnonblank(a:lnum + 1))
-    let prev_line_indent = indent(prevnonblank(a:lnum - 1))
-    " get the current fold level
-    if current_fold_level == -1
-        if prev_line_indent <= this_line_indent
-            let current_fold_level = this_line_indent
-        else
-            let current_fold_level = prev_line_indent
-        endif
-        let current_fold_level = current_fold_level / &sw
-    endif
-
-    let new_fold_level = this_line_indent / &sw
-    if next_line_indent > this_line_indent
-        " next line is a fold under the current one
-        let new_fold_level += 1
-        if new_fold_level <= current_fold_level
-            " end fold if another one starts with the same level
-            return ">" . new_fold_level
-        endif
-        let current_fold_level = new_fold_level
-    elseif new_fold_level <= current_fold_level
-        " ignore unexpected double indents
-        let current_fold_level = new_fold_level
-    endif
-
-    return current_fold_level
-endfunction
-
 setlocal foldmethod=expr
-setlocal foldexpr=VorgFoldExpr(v:lnum)
-setlocal foldtext=VorgFoldText()
+setlocal foldexpr=vorg#folding#foldExpr(v:lnum)
+setlocal foldtext=vorg#folding#foldText()
 
 let b:current_syntax = "vorg"
