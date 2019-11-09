@@ -10,22 +10,33 @@ setlocal tabstop=2
 setlocal shiftwidth=2
 setlocal expandtab
 
-" use - and ? in normal mode to fold and unfold patern items
-nnoremap <buffer> - za
-nnoremap <buffer> ? zA
-
 " insert mode shortcuts
-ab <buffer> -- <TAB>-
-ab <buffer> --[ <TAB>- [ ]
 ab <buffer> -[ - [ ]
 ab <buffer> [[ [ ]
-ab <buffer> --( <TAB>- ( )
 ab <buffer> -( - ( )
 ab <buffer> (( ( )
 
-" normal mode shortcuts to check and uncheck tasks
+" normal mode shortcuts
 nnoremap <buffer> <silent> cx :call vorg#tasks#toggleCheckbox()<CR>
 vnoremap <buffer> <silent> cx :call vorg#tasks#toggleCheckbox()<CR>
+
+nnoremap <buffer> - za
+nnoremap <buffer> ? zA
+
+nmap <buffer> <silent> = :call vorg#table#align()<CR>
+
+" table key maps
+nmap <buffer> dic T\|dt\|=
+nmap <buffer> cic T\|ct\|
+nmap <buffer> yic T\|yt\|
+nmap <buffer> dac T\|df\|=
+nmap <buffer> cac T\|cf\|
+nmap <buffer> yac T\|yf\|
+vmap <buffer> ic T\|vvt\|
+vmap <buffer> ac T\|vvf\|
+
+nmap <buffer> <silent> <Tab> :call vorg#table#jumpCell(1)<CR>
+nmap <buffer> <silent> <S-Tab> :call vorg#table#jumpCell(-1)<CR>
 
 " Shift lines up and down
 nnoremap <buffer> <C-j> mz:m+<CR>`z
@@ -57,3 +68,7 @@ ab <buffer> dp4 <C-R>=vorg#dateFollowing(-4)<CR>
 ab <buffer> dp5 <C-R>=vorg#dateFollowing(-5)<CR>
 ab <buffer> dp6 <C-R>=vorg#dateFollowing(-6)<CR>
 ab <buffer> dp7 <C-R>=vorg#dateFollowing(-7)<CR>
+
+augroup vorg_tables
+	autocmd InsertLeave *.vorg call vorg#table#align()
+augroup END

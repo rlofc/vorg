@@ -10,3 +10,11 @@ function! vorg#util#parseLinesAround(lnum, fun_start, fun_condition, fun_parse)
 	endfor
 	return data
 endfunction
+
+function! vorg#util#export(data, format)
+	let Exporter = vorg#exporters#getExporter(a:format)
+	let exported = Exporter(a:data)
+
+	enew
+	call append(0, exported)
+endfunction
