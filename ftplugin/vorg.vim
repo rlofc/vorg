@@ -68,7 +68,3 @@ ab <buffer> dp4 <C-R>=vorg#dateFollowing(-4)<CR>
 ab <buffer> dp5 <C-R>=vorg#dateFollowing(-5)<CR>
 ab <buffer> dp6 <C-R>=vorg#dateFollowing(-6)<CR>
 ab <buffer> dp7 <C-R>=vorg#dateFollowing(-7)<CR>
-
-augroup vorg_tables
-	autocmd InsertLeave *.vorg call vorg#table#align()
-augroup END

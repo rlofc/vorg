@@ -8,7 +8,12 @@ if exists('loaded_vorg')
 endif
 
 " Offical Vorg interface commands
-command -nargs=? VorgGather :call vorg#gather(input("Search for: "))
 command -nargs=? VorgGatherAll :call vorg#gatherAll(input("Search files for: "))
+command -nargs=? VorgGather :call vorg#gather(input("Search for: "))
+command -nargs=? VorgTableExport :call vorg#table#export(input("Export format: "))
+
+augroup vorg_tables
+	autocmd InsertLeave *.vorg call vorg#table#align()
+augroup END
 
 let loaded_vorg = 1
