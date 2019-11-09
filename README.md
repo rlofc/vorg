@@ -102,8 +102,6 @@ Shortcuts
 - **=** force table alignment
 - **<Tab>** jump to next table cell
 - **<Shift-Tab>** jump to previous table cell
-- **CTRL+k** move a line up
-- **CTRL+j** move a line down
 
 ### visual mode
 - **cx** toggle all checkboxes in lines

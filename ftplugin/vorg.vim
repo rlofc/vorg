@@ -38,14 +38,6 @@ vmap <buffer> ac T\|vvf\|
 nmap <buffer> <silent> <Tab> :call vorg#table#jumpCell(1)<CR>
 nmap <buffer> <silent> <S-Tab> :call vorg#table#jumpCell(-1)<CR>
 
-" Shift lines up and down
-nnoremap <buffer> <C-j> mz:m+<CR>`z
-nnoremap <buffer> <C-k> mz:m-2<CR>`z
-inoremap <buffer> <C-j> <Esc>:m+<CR>gi
-inoremap <buffer> <C-k> <Esc>:m-2<CR>gi
-vnoremap <buffer> <C-j> :m'>+<CR>gv=`<my`>mzgv`yo`z
-vnoremap <buffer> <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
-
 " shortcuts for date entry
 ab <buffer> dd <C-R>=strftime("%Y-%m-%d")<CR>
 ab <buffer> dt <C-R>=strftime("%Y-%m-%d @ %H:%M")<CR>
