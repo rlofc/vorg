@@ -3,7 +3,7 @@
 " Version:      0.3
 " GetLatestVimScripts: 2842 1 :AutoInstall: vorg.vim
 
-if exists('loaded_vorg')
+if exists('g:loaded_vorg')
 	finish
 endif
 
@@ -13,7 +13,8 @@ command -nargs=? VorgGather :call vorg#gather(input("Search for: "))
 command -nargs=? VorgTableExport :call vorg#table#export(input("Export format: "))
 
 augroup vorg_tables
+	autocmd!
 	autocmd InsertLeave *.vorg call vorg#table#align()
 augroup END
 
-let loaded_vorg = 1
+let g:loaded_vorg = 1

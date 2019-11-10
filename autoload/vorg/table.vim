@@ -3,7 +3,7 @@ function! s:isTable(lnum)
 endfunction
 
 function! s:cleanColumn(column)
-	let col = substitute(a:column, '^\s\+\|\s\+$', "", "g")
+	let col = vorg#util#trim(a:column)
 	let col = substitute(l:col, '^-\{2,\}$', "", "g")
 	return l:col
 endfunction

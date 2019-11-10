@@ -18,3 +18,7 @@ function! vorg#util#export(data, format)
 	enew
 	call append(0, exported)
 endfunction
+
+function! vorg#util#trim(string)
+	return substitute(a:string, '^\s\+\|\s\+$', "", "g")
+endfunction

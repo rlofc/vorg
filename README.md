@@ -81,12 +81,17 @@ Tables feature automated aligning, cell text objects, cell navigation and export
 | Rob    | 555 556 557 | rob@mail.com   |
 ```
 
+### Agenda
+Vorg allows you to show an additional window that summarizes the scheduled dates and deadlines in your file. Use **?** to show the agenda window.
+When inside the window, use **o** to jump to line containing the scheduled item. Use **q** to close the window.
+Only dates prepended with **~** or **!** will be taken into account in the agenda window.
+
 Shortcuts
 ---------
 
 ### insert mode
 - **-[** begin a new task as list item
-- **-[** begin a new radio as list item
+- **-(** begin a new radio as list item
 - **[[** begin a new task as free text
 - **((** begin a new radio as free text
 - **dd** add the current date
@@ -97,11 +102,12 @@ Shortcuts
 
 ### normal mode
 - **-** fold or unfold a section
-- **?** fold or unfold a section recursively
+- **g-** fold or unfold a section recursively
 - **cx** toggle a task checkbox (works with count)
 - **=** force table alignment
 - **<Tab>** jump to next table cell
 - **<Shift-Tab>** jump to previous table cell
+- **?** show agenda
 
 ### visual mode
 - **cx** toggle all checkboxes in lines
@@ -109,6 +115,10 @@ Shortcuts
 ### text objects
 - **ic** inner table cell
 - **ac** outer table cell
+
+### agenda and quickfix windows
+- **o** jump to line
+- **q** close the window
 
 Commands
 --------
@@ -118,21 +128,21 @@ These commands are not bound to a specific keymap
 - **VorgGather** - search for a prompted word inside a current file, put results into a quickfix list
 - **VorgGatherAll** - search for a prompted word inside vorg files, recursively, put results into a quickfix list
 
-The quickfix list opened by some of these commands has the following custom key maps:
-- **o** - jump to line
-- **q** - close the window
-
 Constructs
 ----------
 Using special notation can cause some parts of a vorg file to have special meaning
-- **|...|** a table
-- **!date** a deadline
-- **... | datetime** a timestamp (log entry)
-- **// ...** a comment
 - **#tag** a tag
+- **|...|** a table
+- **!datetime** a deadline
+- **~datetime** a scheduled date
+- **// ...** a comment
 
 Indentation
 -----------
 A valid vorg file uses (exactly) 2 spaces to indent items. This scheme ensures your files will be readable in any editor.
 This is not a technical constraint. It is an aesthetic constraint designed to make sure vorg files are easy to read.
 
+Dates
+-----
+Vorg file uses dates in format: **YYYY-MM-DD @ HH:II**
+The plugin will try to normalize the date (not the time) part, but it's best to keep this convention.
