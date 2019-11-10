@@ -105,8 +105,8 @@ Shortcuts
 - **g-** fold or unfold a section recursively
 - **cx** toggle a task checkbox (works with count)
 - **=** force table alignment
-- **<Tab>** jump to next table cell
-- **<Shift-Tab>** jump to previous table cell
+- **Tab** jump to next table cell
+- **Shift-Tab** jump to previous table cell
 - **?** show agenda
 
 ### visual mode
