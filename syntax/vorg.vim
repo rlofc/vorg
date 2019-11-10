@@ -1,7 +1,6 @@
-" vorg.vim - Vim ORG mode. Your stuff in plain text.
-" Maintainer:   Ithai Levi <http://github.org/L3V3L9/>
-" Version:      0.3
-" GetLatestVimScripts: 2842 1 :AutoInstall: vorg.vim
+" vorg.vim - Vim organization format.
+" Maintainer:   Bartosz Jarzyna <https://github.com/brtastic>
+" Version:      1.0
 
 " Syntax Definition
 if version < 600

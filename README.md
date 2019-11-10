@@ -146,3 +146,13 @@ Dates
 -----
 Vorg file uses dates in format: **YYYY-MM-DD @ HH:II**
 The plugin will try to normalize the date (not the time) part, but it's best to keep this convention.
+
+Vim requirements
+----------------
+TBD.
+Required Vim version 8
+
+Authors
+---------------
+The plugin was originally developed by Ithai Levi <https://github.com/rlofc>
+Forked and currently maintained by Bartosz Jarzyna <https://github.com/brtastic>
