@@ -43,7 +43,7 @@ function! vorg#dates#commonName(date)
 		let date = "Today"
 	elseif date_dist == 1
 		let date = "Tomorrow"
-	elseif date_dist < 7
+	elseif date_dist > 0 && date_dist < 7
 		let date = substitute(strftime("%A", vorg#dates#nextWeekdayTimestamp(date_dist)), '\<.', '\u&', "")
 	endif
 
