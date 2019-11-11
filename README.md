@@ -124,7 +124,7 @@ Commands
 --------
 These commands are not bound to a specific keymap
 
-- **VorgTableExport** - exports a table under cursor to a prompted format. Currently supported formats are csv and json
+- **VorgTableExport** - exports a table under cursor to a prompted format. Currently supported formats are csv, html and json
 - **VorgGather** - search for a prompted word inside a current file, put results into a quickfix list
 - **VorgGatherAll** - search for a prompted word inside vorg files, recursively, put results into a quickfix list
 
