@@ -28,7 +28,7 @@ function! s:makePrintableStructure(data)
 	let dates = {}
 
 	for [lnum, text, date] in a:data
-		let text = vorg#util#trim(text) . " " . (date[0] ==# "!" ? "DEADLINE" : "SCHEDULED")
+		let text = vorg#util#trim(text)
 		let date = date[1:]
 
 		let date_time = split(date, ' @ ')
@@ -89,7 +89,7 @@ endfunction
 function! s:gatherFromLine(line, lnum, items)
 	let match = matchstr(a:line, s:scheduled_match)
 	if strlen(match) > 0
-		let line = substitute(a:line, s:scheduled_match, "", "g")
+		let line = substitute(a:line, s:scheduled_match, (match[0] ==# "!" ? "DEADLINE" : "SCHEDULED"), "")
 		call add(a:items, [a:lnum, line, match])
 	endif
 endfunction
