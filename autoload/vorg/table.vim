@@ -144,8 +144,10 @@ function! vorg#table#export(format)
 		" export
 		try
 			call vorg#util#export(table, a:format)
+			let &filetype = a:format
 		catch /^no exporter/
 			echoe v:exception
 		endtry
 	endif
 endfunction
+
