@@ -51,7 +51,7 @@ endfunction
 function! s:fillAgendaWindow(data)
 	let view = winsaveview()
 	setlocal modifiable
-	execute "1," . line('$') . "delete"
+	execute "1," . line('$') . "delete _"
 	let b:meta = {}
 	let line = 1
 
@@ -79,7 +79,7 @@ function! s:fillAgendaWindow(data)
 	endfor
 
 	for line in fopen
-		execute line . "," . line . "foldo"
+		execute line . "foldo"
 	endfor
 
 	setlocal nomodifiable
@@ -171,3 +171,4 @@ function! vorg#agenda#jump()
 		endif
 	endif
 endfunction
+
