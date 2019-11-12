@@ -43,6 +43,10 @@ function! s:makePrintableStructure(data)
 		let dates[date] = dict_item
 	endfor
 
+	let dates = map(dates, {
+		\i, val -> sort(val)
+	\})
+
 	return sort(items(dates), {
 		\d1, d2 -> vorg#dates#compare(d1[0], d2[0])
 	\})
