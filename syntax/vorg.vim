@@ -1,90 +1,65 @@
-" vorg.vim - Vim ORG mode. Your stuff in plain text.
-" Maintainer:   Ithai Levi <http://github.org/L3V3L9/>
-" Version:      0.3
-" GetLatestVimScripts: 2842 1 :AutoInstall: vorg.vim
+" vorg.vim - Vim organization format.
+" Maintainer:   Bartosz Jarzyna <https://github.com/brtastic>
+" Version:      1.0
 
 " Syntax Definition
 if version < 600
-  syntax clear
+	syntax clear
 elseif exists("b:current_syntax")
-  finish
+	finish
 endif
 
-syn match vorgDeadline        "[<>^]\ \d*[/-]\d*[/-]\d*" contained
-syn match vorgTag             "<.*>" contained
-syn match vorgLink            "\%(http://\|www\.\)[^ ,;\t]*" contained
-syn match vorgTitle           "^\t*[-\*].*" contains=vorgTag,vorgLink
-syn match vorgTaskAlt         "\t*\[[o\ ]\].*" contains=vorgTag,vorgDeadline,vorgLink
-syn match vorgTask            "\t*[-\*].*\[[o\ ]\].*" contains=vorgTag,vorgDeadline,vorgLink
-syn match vorgDone            "\t*[-\*].*\[[X|x]\].*"
-syn match vorgDoneAlt         "\t*\[[X|x]\].*"
-syn match vorgComment         "// .*"
-syn match vorgLogdate         "\t*[-\*].*\~\ \d*[/-]\d*[/-]\d*[ ]@[ ]\d*:\d*.*" contains=vorgTag,vorgLink
-syn match vorgPrefixLogdate   "\t*[-\*]\ *\d*[/-]\d*[/-]\d*[ ]@[ ]\d*:\d*\ \~.*" contains=vorgTag,vorgLink
+syn keyword vorgDeadlineKw    DEADLINE contained
+syn keyword vorgScheduledKw   SCHEDULED contained
 
-hi Function gui=bold
-hi Constant gui=bold
-hi Keyword gui=bold
-hi Number gui=underline
+syn match vorgDeadline        "\(\s\|^\)\@<=!\d\+[/-]\d\+[/-]\d\+\( @ \d\+:\d\+\)\?\(\s\|$\)\@=" contained
+syn match vorgScheduled       "\(\s\|^\)\@<=\~\d\+[/-]\d\+[/-]\d\+\( @ \d\+:\d\+\)\?\(\s\|$\)\@=" contained
+syn match vorgTag             "\(\s\|^\)\@<=#\w\+" contained
+syn match vorgComment         "// .*" contained
 
-hi def link vorgComment       Comment
-hi def link vorgDone	         Comment
-hi def link vorgDoneAlt	      Comment
-hi def link vorgTitle         Function
-hi def link vorgTaskAlt       Keyword
-hi def link vorgTask          Keyword
-hi def link vorgTag           Comment
-hi def link vorgDeadline      String
-hi def link vorgLogdate       Constant
-hi def link vorgPrefixLogdate Constant
-hi! vorgLink gui=underline
-hi! link Folded Comment
+syn match vorgLink            "\(\s\|^\)\@<=\%(https\?://\|www\.\)[^,; \t]*" contained
+syn match vorgIpv4            "\(\s\|^\)\@<=\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\(:\d\{1,5\}\)\?\(\s\|$\)\@=" contained
+syn match vorgHex             "\(\s\|^\)\@<=0x[0-9a-fA-F]\+\(\s\|$\)\@=" contained
+syn match vorgNumber          "\(\s\|^\)\@<=[0-9]\+\([,.][0-9]\+\)\?\(\s\|$\)\@=" contained
+syn match vorgDate            "\(\s\|^\)\@<=\d\+[/-]\d\+[/-]\d\+\(\s\|$\)\@=" contained
+syn match vorgTime            "\(\s\|^\)\@<=\d\+:\d\+\(\s\|$\)\@=" contained
 
-" Fold based on the Vorg specification
-function! SimpleFoldText()
-	return	repeat(' ',indent(v:foldstart)).substitute(getline(v:foldstart),"[ \t]*[-\*]","+","").' '
-endfunction
-set foldtext=SimpleFoldText() " Custom fold text function
+syn match vorgTask            "\[[ ]\]" contained
+syn match vorgRadio           "([ xX])" contained
+syn match vorgTaskDone        "\[[xX]\]" contained
+syn match vorgDoneText        ".*\[[xX]\].*" contained contains=vorgTaskDone
 
-function! LimitFoldLevel(level)
-	return a:level
-endfunction
+syn match vorgEmptyCell       "|\@<=-\{2,\}|\@=" contained
+syn match vorgCellSep         "|" contained
+syn match vorgTableCell       "|[^|]*|" contained contains=ALLBUT,vorgDoneText,vorgListItem,vorgComment,vorgText
 
-function! VorgFoldExpr(lnum)
+syn match vorgListItem        "^\s*-" contained
 
-   if match(getline(a:lnum),'^[ \t]*$') != -1
-      if indent(prevnonblank(a:lnum-1)) > indent(nextnonblank(a:lnum+1))
-         if nextnonblank(a:lnum+1) == a:lnum+1
-            return  '<'.LimitFoldLevel(indent(prevnonblank(a:lnum-1)) / &sw)
-         endif
-      endif
-      return '='
-   endif
+syn match vorgText            ".*" contains=ALLBUT,vorgTableCell,vorgEmptyCell,vorgCellSep nextgroup=vorgComment
+syn match vorgTableRow        "^\s*|.*|\s*$" contains=vorgTableCell
 
-   if indent( nextnonblank(a:lnum+1) ) > indent( a:lnum )
-      if indent(prevnonblank(a:lnum-1)) > indent(a:lnum)
-         return '>'.(LimitFoldLevel(indent(a:lnum) / &sw  +1))
-      else
-         return LimitFoldLevel(indent( a:lnum ) / &sw  +1)
-      endif
-   endif
+hi def link vorgComment        Comment
+hi def link vorgTag            Comment
+hi def link vorgDoneText       Comment
+hi def link vorgEmptyCell      Comment
+hi def link vorgListItem       Function
+hi def link vorgCellSep        Function
+hi def link vorgTask           Special
+hi def link vorgRadio          Special
+hi def link vorgTaskDone       Special
+hi def link vorgDeadline       Todo
+hi def link vorgScheduled      Todo
+hi def link vorgDeadlineKw     Error
+hi def link vorgScheduledKw    Todo
+hi def link vorgLink           Constant
+hi def link vorgIpv4           Constant
+hi def link vorgDate           String
+hi def link vorgTime           String
+hi def link vorgHex            Number
+hi def link vorgNumber         Number
 
-   if indent( nextnonblank(a:lnum+1) ) == indent( a:lnum )
-      return LimitFoldLevel(indent( a:lnum ) / &sw)
-   endif
-
-   if indent( nextnonblank(a:lnum+1) ) < indent( a:lnum )
-      if nextnonblank(a:lnum+1) > a:lnum+1
-         return  LimitFoldLevel(indent(a:lnum) / &sw)
-      else
-         return  '<'.LimitFoldLevel(indent(a:lnum) / &sw)
-      endif
-   endif
-
-   return '='
-endfunction
-
-set foldmethod=expr
-set foldexpr=VorgFoldExpr(v:lnum)
+setlocal foldmethod=expr
+setlocal foldexpr=vorg#folding#foldExpr(v:lnum)
+setlocal foldtext=vorg#folding#foldText()
 
 let b:current_syntax = "vorg"

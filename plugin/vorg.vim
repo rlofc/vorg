@@ -1,35 +1,19 @@
-" vorg.vim - Vim ORG mode. Your stuff in plain text.
-" Maintainer:   Ithai Levi <http://github.org/L3V3L9/>
-" Version:      0.3
-" GetLatestVimScripts: 2842 1 :AutoInstall: vorg.vim
+" vorg.vim - Vim organization format.
+" Maintainer:   Bartosz Jarzyna <https://github.com/brtastic>
+" Version:      1.0
 
-if exists('loaded_vorg')
+if exists('g:loaded_vorg')
 	finish
 endif
-let loaded_vorg = 1
-
-function! s:Gather(pattern)
-  if !empty(a:pattern)
-    let results = []
-    execute "vimgrep " . a:pattern . " " . expand('%')
-    :copen
-  endif
-endfunction
-
-function! s:GatherAllVorgs(pattern)
-  if !empty(a:pattern)
-    let results = []
-    execute "vimgrep " . a:pattern . " **/*.vorg"
-    :copen
-  endif
-endfunction
 
 " Offical Vorg interface commands
-if !exists(":VorgGather")
-    command -nargs=? VorgGather :call <SID>Gather(input("Search for: "))
-endif
-if !exists(":VorgGatherAll")
-    command -nargs=? VorgGatherAll :call <SID>GatherAllVorgs(input("Search for: "))
-endif
+command -nargs=? VorgGatherAll :call vorg#gatherAll(input("Search files for: "))
+command -nargs=? VorgGather :call vorg#gather(input("Search for: "))
+command -nargs=? VorgTableExport :call vorg#table#export(input("Export format: "))
 
-let b:current_syntax = "vorg"
+augroup vorg_tables
+	autocmd!
+	autocmd InsertLeave *.vorg call vorg#table#align()
+augroup END
+
+let g:loaded_vorg = 1
